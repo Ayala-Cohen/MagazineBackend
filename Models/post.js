@@ -18,6 +18,9 @@ const postSchema = mongoose.Schema({
     },
     by: {
         type: String
+    },
+    magazine: {
+        type: mongoose.Schema.Types.ObjectId
     }
 })
 
