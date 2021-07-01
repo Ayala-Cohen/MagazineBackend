@@ -4,6 +4,7 @@ const cors = require('cors')
 const dotenv = require('dotenv').config()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 
 const router = require('./router')
 const options = {
