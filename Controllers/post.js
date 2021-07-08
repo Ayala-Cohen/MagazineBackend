@@ -21,9 +21,11 @@ const getPostById = async (req, res) => {
 
 const getAllPostsOfMagazine = async (req, res) => {
     try {
-        let posts = Post.find(post => post.magazine == req.params.magazineId)
+        // post => post.magazine == req.params.magazineId
+        let posts = Post.find().populate()
         res.json({ status: 200, result: posts })
     } catch (err) {
+        console.log(err);
         res.json({ status: 400, error: err })
     }
 }

@@ -1,17 +1,17 @@
 const express = require('express')
 const router = express.Router()
 
-const userFuncitons = require('./Controllers/user')
+const userFunctions = require('./Controllers/user')
 const postFunctions = require('./Controllers/post')
 const magazineFunctions = require('./Controllers/magazine')
 
 
 //user routings
-router.get('/getAllUsers', userFuncitons.getAllUsers)
-router.get('/getUserById/:userId', userFuncitons.getUserById)
-router.post('/createUser', userFuncitons.createUser)
-router.post('/updateUser', userFuncitons.updateUser)
-router.delete('/deleteUser/:userId', userFuncitons.deleteUser)
+router.get('/getAllUsers', userFunctions.getAllUsers)
+router.get('/getUserById/:userId', userFunctions.getUserById)
+router.post('/createUser', userFunctions.createUser)
+router.post('/updateUser', userFunctions.updateUser)
+router.delete('/deleteUser/:userId', userFunctions.deleteUser)
 
 //magazine routing
 router.get('/getAllMagazines', magazineFunctions.getAllMagazines)

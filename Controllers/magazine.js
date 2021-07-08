@@ -24,6 +24,7 @@ const getAllMagazines = async (req, res) => {
         let magazines = Magazine.find()
         res.json({ status: 200, result: magazines })
     } catch (err) {
+        console.log(err);
         res.json({ status: 400, error: err })
     }
 }

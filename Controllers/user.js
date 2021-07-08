@@ -1,6 +1,7 @@
 const User = require('../Models/user')
 
 const createUser = (req, res) => {
+    console.log("creating user");
     let newUser = new User(req.body)
     newUser.save((err, user) => {
         if (err)
