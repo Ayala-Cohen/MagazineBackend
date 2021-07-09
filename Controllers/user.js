@@ -22,7 +22,7 @@ const getUserById = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
     try {
-        let users = User.find()
+        let users = await User.find()
         res.json({ status: 200, result: users })
     } catch (err) {
         res.json({ status: 400, error: err })

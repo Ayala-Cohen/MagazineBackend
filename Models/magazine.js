@@ -5,10 +5,10 @@ const magazineSchema = mongoose.Schema({
     logo: {
         type: String
     },
-    posts: {
-        type: [mongoose.Schema.Types.ObjectId],
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
-    },
+    }],
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

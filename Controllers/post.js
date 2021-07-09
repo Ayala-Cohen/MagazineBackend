@@ -12,7 +12,7 @@ const createPost = (req, res) => {
 
 const getPostById = async (req, res) => {
     try {
-        let post = await Post.findById(req.params.postId)
+        let post = await Post.findById(req.params.postId).populate('magazine')
         res.json({ status: 200, result: post })
     } catch (err) {
         res.json({ status: 400, error: err })
@@ -21,8 +21,7 @@ const getPostById = async (req, res) => {
 
 const getAllPostsOfMagazine = async (req, res) => {
     try {
-        // post => post.magazine == req.params.magazineId
-        let posts = Post.find().populate()
+        let posts = await Post.find({ magazine: req.params.magazineId }).populate('magazine')
         res.json({ status: 200, result: posts })
     } catch (err) {
         console.log(err);
