@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
             , message: props => `${props.value} is not valid email address`
         }
     },
-    magazine:
+    magazines:
         [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Magazine'

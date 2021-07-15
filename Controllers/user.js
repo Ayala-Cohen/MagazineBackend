@@ -13,7 +13,7 @@ const createUser = (req, res) => {
 
 const getUserById = async (req, res) => {
     try {
-        let user = await User.findById(req.params.userId)
+        let user = await User.findById(req.params.userId).populate('magazines')
         res.json({ status: 200, result: user })
     } catch (err) {
         res.json({ status: 400, error: err })

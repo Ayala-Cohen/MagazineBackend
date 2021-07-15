@@ -21,7 +21,7 @@ const getMagazineById = async (req, res) => {
 
 const getAllMagazines = async (req, res) => {
     try {
-        let magazines = await Magazine.find().populate('user')
+        let magazines = await Magazine.find().populate('posts')
         res.json({ status: 200, result: magazines })
     } catch (err) {
         console.log(err);
