@@ -21,10 +21,10 @@ const userSchema = mongoose.Schema({
         }
     },
     magazine:
-        [{
+        {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Magazine'
-        }]
+        }
 })
 
 
