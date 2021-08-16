@@ -6,7 +6,7 @@ const createUser = async (req, res) => {
     let newUser = new User(req.body)
     try {
         await newUser.save()
-        let token = jwt.sign({ userName: newUser.userName, password: newUser.password }, process.env.CIPHER)
+        let token = jwt.sign({ userName: newUser.email, password: newUser.password }, process.env.CIPHER)
         res.json({ status: 200, result: { user: newUser, token: token } })
     } catch (err) {
         console.log(err);
@@ -54,12 +54,15 @@ const checkAuth = async (req, res) => {
     try {
         let token = req.headers.authorization
         let { userName, password } = req.params
-        if (jwt.verify(token, process.env.CIPHER).userName === userName && jwt.verify(token, process.env.CIPHER).password === password) {
-            let user = await User.findOne({ userName: userName, password: password }).populate({ path: 'magazine', populate: { path: 'posts' } })
+        let verified = jwt.verify(token, process.env.CIPHER)
+        if (verified.userName === userName && verified.password === password) {
+            let user = await User.findOne({ email: userName, password: password }).populate({ path: 'magazine', populate: { path: 'posts' } })
             res.json({ status: 200, result: { user: user } })
         }
+        else
+            res.json({ status: 200, result: { identified: false } })
     } catch (err) {
-        res.json({ status: 400 })
+        res.json({ status: 400, error: err })
     }
 }
 module.exports = {

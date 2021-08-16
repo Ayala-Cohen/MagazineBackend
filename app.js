@@ -29,8 +29,8 @@ mongoose.connect(process.env.DB_STRING_CONNECT, options).then(() => {
     console.log(err)
 })
 
+app.use(cors())
 app.use(router)
-app.use(cors)
 
 
 
