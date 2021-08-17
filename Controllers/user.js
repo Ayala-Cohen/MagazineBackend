@@ -1,14 +1,17 @@
 const User = require('../Models/user')
+const jwt = require('jsonwebtoken')
 
-const createUser = (req, res) => {
-    console.log("creating user");
+const createUser = async (req, res) => {
+
     let newUser = new User(req.body)
-    newUser.save((err, user) => {
-        if (err)
-            res.json({ status: 400, error: err })
-        else
-            res.json({ status: 200, result: user })
-    })
+    try {
+        await newUser.save()
+        let token = jwt.sign({ userName: newUser.email, password: newUser.password }, process.env.CIPHER)
+        res.json({ status: 200, result: { user: newUser, token: token } })
+    } catch (err) {
+        console.log(err);
+        res.json({ status: 400, error: err })
+    }
 }
 
 const getUserById = async (req, res) => {
@@ -46,10 +49,27 @@ const deleteUser = async (req, res) => {
         res.json({ status: 400, error: err })
     }
 }
+
+const checkAuth = async (req, res) => {
+    try {
+        let token = req.headers.authorization
+        let { userName, password } = req.params
+        let verified = jwt.verify(token, process.env.CIPHER)
+        if (verified.userName === userName && verified.password === password) {
+            let user = await User.findOne({ email: userName, password: password }).populate({ path: 'magazine', populate: { path: 'posts' } })
+            res.json({ status: 200, result: { user: user } })
+        }
+        else
+            res.json({ status: 200, result: { identified: false } })
+    } catch (err) {
+        res.json({ status: 400, error: err })
+    }
+}
 module.exports = {
     createUser,
     getAllUsers,
     getUserById,
     updateUser,
-    deleteUser
+    deleteUser,
+    checkAuth
 }

@@ -24,13 +24,13 @@ app.listen(process.env.PORT, ()=> {
 })
 
 mongoose.connect(process.env.DB_STRING_CONNECT, options).then(() => {
-    console.log("success conncting to data base")
+    console.log("success connecting to data base")
 }).catch(err => {
     console.log(err)
 })
 
+app.use(cors())
 app.use(router)
-app.use(cors)
 
 
 
