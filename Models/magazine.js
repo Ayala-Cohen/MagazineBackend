@@ -5,6 +5,24 @@ const magazineSchema = mongoose.Schema({
     logo: {
         type: String
     },
+    title_text: {
+        type: String
+    },
+    title_color: {
+        type: String
+    },
+    hello_bar_title: {
+        type: String
+    },
+    hello_bar_color: {
+        type: String
+    },
+    hello_bar_button: {
+        type: String
+    },
+    hello_bar_color: {
+        type: String
+    },
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
@@ -19,7 +37,7 @@ const magazineSchema = mongoose.Schema({
 
 magazineSchema.pre('save', async function (next) {
     try {
-        await User.findByIdAndUpdate(this.user, {magazine:this._id})
+        await User.findByIdAndUpdate(this.user, { magazine: this._id })
     } catch (err) {
         console.log(err);
     }
