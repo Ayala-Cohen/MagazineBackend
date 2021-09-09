@@ -20,7 +20,7 @@ const magazineSchema = mongoose.Schema({
     hello_bar_button: {
         type: String
     },
-    hello_bar_color: {
+    hello_bar_button_color: {
         type: String
     },
     posts: [{
