@@ -19,7 +19,7 @@ const magazineSchema = mongoose.Schema({
 
 magazineSchema.pre('save', async function (next) {
     try {
-        await User.findByIdAndUpdate(this.user, {magazine:this._id})
+        await User.findByIdAndUpdate(this.user, { $push: { magazines: this._id } })
     } catch (err) {
         console.log(err);
     }
